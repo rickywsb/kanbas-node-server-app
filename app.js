@@ -9,13 +9,19 @@ import "dotenv/config";
 
 
 const app = express();
-app.use(
-    cors({
-      credentials: true,
-      origin: process.env.FRONTEND_URL
-    })
-  );
-  
+const allowedOrigins = ['http://localhost:3000', 'https://creative-nougat-9b83f1.netlify.app'];
+
+app.use(cors({
+    credentials: true,
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
+
 
 CourseRoutes(app);
 app.use(express.json());
