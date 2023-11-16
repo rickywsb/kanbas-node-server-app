@@ -9,7 +9,7 @@ import "dotenv/config";
 
 
 const app = express();
-const allowedOrigins = ['http://localhost:3000', 'https://creative-nougat-9b83f1.netlify.app'];
+const allowedOrigins = ['http://localhost:3000', 'https://a5--creative-nougat-9b83f1.netlify.app'];
 
 app.use(cors({
     credentials: true,
