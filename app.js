@@ -9,6 +9,7 @@ import "dotenv/config";
 
 
 const app = express();
+app.use(express.json());
 const allowedOrigins = ['http://localhost:3000', 'https://a5--creative-nougat-9b83f1.netlify.app'];
 
 app.use(cors({
@@ -24,7 +25,7 @@ app.use(cors({
 
 
 CourseRoutes(app);
-app.use(express.json());
+
 ModuleRoutes(app);
 AssignmentRoutes(app);
 Lab5(app);

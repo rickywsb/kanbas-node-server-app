@@ -4,6 +4,7 @@ function CourseRoutes(app) {
     const courses = Database.courses;
     res.send(courses);
   });
+  
   app.post("/api/courses", (req, res) => {
     console.log("Received course data:", req.body);
 
