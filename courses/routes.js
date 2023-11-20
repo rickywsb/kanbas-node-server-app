@@ -5,11 +5,18 @@ function CourseRoutes(app) {
     res.send(courses);
   });
   app.post("/api/courses", (req, res) => {
-    const course = { ...req.body,
-      _id: new Date().getTime().toString() };
-    Database.courses.push(course);
-    res.send(course);
-  });
+    console.log("Received course data:", req.body);
+
+    const newCourse = {
+       ...req.body,
+       _id: new Date().getTime().toString(),
+    }
+      Database.courses.unshift(newCourse);
+      console.log("Sending new course:", newCourse); // Add this line for debugging
+
+      res.json(newCourse);
+    });
+
   app.delete("/api/courses/:id", (req, res) => {
     const { id } = req.params;
     Database.courses = Database.courses
@@ -19,9 +26,8 @@ function CourseRoutes(app) {
   app.put("/api/courses/:id", (req, res) => {
     const { id } = req.params;
     const course = req.body;
-    Database.courses = Database.courses.map((c) =>
-      c._id === id ? { c, ...course } : c
-    );
+    Database.courses = Database.courses.map((c) => c._id === id ? { ...c, ...course } : c);
+
     res.sendStatus(204);
   });
 
