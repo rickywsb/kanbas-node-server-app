@@ -9,7 +9,7 @@ import mongoose from 'mongoose';
 import UserRoutes from "./users/routes.js";
 import ModuleRoutes from "./modules/routes.js";
 import AssignmentRoutes from './assignments/routes.js';
-import "dotenv/config";
+
 
 mongoose.connect("mongodb+srv://wusiboricky:zyq19960123@web5610.duup1ki.mongodb.net/kanbas");
 
@@ -18,10 +18,10 @@ app.use(
     cors({
       credentials: true,
       origin: process.env.FRONTEND_URL
-      ,
     })
    );
-   const sessionOptions = {
+
+const sessionOptions = {
     secret: "any string",
     resave: false,
     saveUninitialized: false,
