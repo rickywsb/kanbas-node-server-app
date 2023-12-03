@@ -30,10 +30,16 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 
 const app = express();
 
-// CORS configuration
+const allowedOrigins = ['https://a6--creative-nougat-9b83f1.netlify.app', 'http://localhost:3000'];
 app.use(cors({
   credentials: true,
-  origin: 'https://a6--creative-nougat-9b83f1.netlify.app/'
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
 
 // Session configuration
