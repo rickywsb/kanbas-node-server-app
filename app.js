@@ -33,7 +33,7 @@ const app = express();
 // CORS configuration
 app.use(cors({
   credentials: true,
-  origin: process.env.FRONTEND_URL
+  origin: 'https://a6--creative-nougat-9b83f1.netlify.app/'
 }));
 
 // Session configuration
