@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 
 const app = express();
 
-const allowedOrigins = ['https://a6--creative-nougat-9b83f1.netlify.app', 'http://localhost:3000'];
+const allowedOrigins = process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : [];
 app.use(cors({
   credentials: true,
   origin: (origin, callback) => {
@@ -41,6 +41,7 @@ app.use(cors({
     }
   }
 }));
+
 
 // Session configuration
 const sessionOptions = {
