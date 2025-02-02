@@ -131,7 +131,7 @@ $(FULL_DUCKDB_LIB):
 # Install the DuckDB .so into Postgres lib dir
 ###############################################################################
 install-duckdb: $(FULL_DUCKDB_LIB) $(shlib)
-	$(INSTALL_LIB) $(FULL_DUCKDB_LIB) $(DESTDIR)$(PG_LIB)
+	install -c -m 755 $(FULL_DUCKDB_LIB) $(DESTDIR)$(PG_LIB)
 
 ###############################################################################
 # Cleanup rules
@@ -159,3 +159,4 @@ format-all:
 	find src include -iname '*.hpp' -o -iname '*.h' -o -iname '*.cpp' -o -iname '*.c' \
 	    | xargs clang-format -i
 	ruff format
+
