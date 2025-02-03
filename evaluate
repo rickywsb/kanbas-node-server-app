@@ -1,3 +1,4 @@
+
 postgres=# SELECT *
 FROM read_csv('/tmp/test.csv')
        AS t(col1 VARCHAR, col2 INTEGER, col3 VARCHAR);
@@ -22,3 +23,16 @@ postgres=# SELECT current_setting('duckdb.disabled_filesystems');
 -----------------
  LocalFileSystem
 (1 row)
+
+
+duckdb.max_memory / duckdb.memory_limit (Default: "4GB", Superuser-only)
+– Evaluation: This parameter sets the maximum memory per Postgres connection used by DuckDB. It is comparable to PostgreSQL’s work_mem and is key for performance tuning.
+– Recommendation: Exposing this parameter is valuable since instance classes differ by available memory. Provide recommended guidelines (e.g., based on instance class) so customers can tune resource usage without oversubscribing memory.
+
+duckdb.threads / duckdb.worker_threads (Default: -1, Superuser-only)
+– Evaluation: This controls the number of threads used per connection. Adjusting this may improve performance on multi-core instances, but misconfiguration could lead to resource contention.
+– Recommendation: Expose this parameter for advanced users with clear documentation; however, consider safe defaults that align with the underlying hardware (e.g., leaving it at -1 to use the CPU core count).
+
+duckdb.max_threads_per_postgres_scan (Default: 1, General, experimental)
+– Evaluation: This experimental setting limits the threads used during a single Postgres scan. Early testing suggests that a value of 1 is optimal in many cases.
+– Recommendation: Because it is experimental but classified as general, you might expose it with a strong advisory note that increasing it is not recommended unless testing indicates a benefit.
