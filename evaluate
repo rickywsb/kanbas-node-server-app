@@ -1,0 +1,24 @@
+postgres=# SELECT *
+FROM read_csv('/tmp/test.csv')
+       AS t(col1 VARCHAR, col2 INTEGER, col3 VARCHAR);
+ col1  | col2 | col3  
+-------+------+-------
+ hello |    1 | world
+ duck  |    2 | db
+(2 rows)
+
+postgres=# SET duckdb.disabled_filesystems = '';
+SET
+postgres=# SELECT current_setting('duckdb.disabled_filesystems');
+ current_setting 
+-----------------
+ 
+(1 row)
+
+postgres=# SET duckdb.disabled_filesystems = 'LocalFileSystem';
+SET
+postgres=# SELECT current_setting('duckdb.disabled_filesystems');
+ current_setting 
+-----------------
+ LocalFileSystem
+(1 row)
